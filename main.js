@@ -41,7 +41,45 @@ document.querySelector('#app').innerHTML = `
 `;
 
 const canvas = document.querySelector('#canvas');
+const sidebar = document.querySelector('.sidebar');
+const container = document.querySelector('.container');
+
+
+canvas.width = window.innerWidth-100;
+canvas.height = window.innerHeight;
+
 const context = canvas.getContext('2d', {willReadFrequently: true});
+
+context.fillStyle = 'white';
+context.fillRect(0, 0, canvas.width, canvas.height);
+
+let isDrawing = false;
+// let currentColor = 'black';
+
+
+const start = (event) => {
+    isDrawing =- true;
+    context.beginPath();
+    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    event.preventDefault();
+}
+const draw = (event) => {
+    if(isDrawing) {
+        context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        console.log(event.clientX - canvas.offsetLeft);
+        console.log(event.clientY - canvas.offsetTop);
+        context.strokeStyle = 'black';
+        context.lineWidth = 3;
+        context.lineCap = 'round';
+        context.lineJoin = 'round';
+        context.stroke();
+    }
+}
+
+canvas.addEventListener('touchstart', start, false);
+canvas.addEventListener('touchmove', draw, false);
+canvas.addEventListener('mousedown', start, false);
+canvas.addEventListener('mousemove', draw, false);
 
 canvas.style.background = '#fff';
 
