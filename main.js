@@ -75,11 +75,23 @@ const draw = (event) => {
         context.stroke();
     }
 }
+const stop = (event) => {
+    if(isDrawing) {
+        context.stroke();
+        context.closePath();
+        isDrawing = false;
+    }
+    event.preventDefault();
+}
 
 canvas.addEventListener('touchstart', start, false);
 canvas.addEventListener('touchmove', draw, false);
 canvas.addEventListener('mousedown', start, false);
 canvas.addEventListener('mousemove', draw, false);
+
+canvas.addEventListener('mouseup', stop, false);
+canvas.addEventListener('mouseout', stop, false);
+canvas.addEventListener('touchend', stop, false);
 
 canvas.style.background = '#fff';
 
