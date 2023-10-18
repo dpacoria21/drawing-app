@@ -42,15 +42,24 @@ document.querySelector('#app').innerHTML = `
 
 let isDrawing = false;
 let currentColor = 'black';
+let lineWidth = 1;
 
 const canvas = document.querySelector('#canvas');
 
 // buttons-color
-const buttons = document.querySelectorAll('.option-color');
-buttons.forEach((button) => {
+const buttonsColor = document.querySelectorAll('.option-color');
+buttonsColor.forEach((button) => {
     button.addEventListener('click', () => {
         currentColor = button.style.background;
     })
+})
+
+// buttons-width
+const buttonsWidth = document.querySelectorAll('.option-width');
+buttonsWidth.forEach((button) => {
+    button.addEventListener('click', () => {
+        lineWidth = button.getAttribute('data-width');
+    });
 })
 
 canvas.width = window.innerWidth - 130;
@@ -72,7 +81,7 @@ const draw = (event) => {
     if(isDrawing) {
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
         context.strokeStyle = currentColor;
-        context.lineWidth = 1;
+        context.lineWidth = lineWidth;
         context.lineCap = 'round';
         context.lineJoin = 'round';
         context.stroke();
