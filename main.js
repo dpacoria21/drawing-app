@@ -40,10 +40,18 @@ document.querySelector('#app').innerHTML = `
     </section>
 `;
 
-const canvas = document.querySelector('#canvas');
-const sidebar = document.querySelector('.sidebar');
-const container = document.querySelector('.container');
+let isDrawing = false;
+let currentColor = 'black';
 
+const canvas = document.querySelector('#canvas');
+
+// buttons-color
+const buttons = document.querySelectorAll('.option-color');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        currentColor = button.style.background;
+    })
+})
 
 canvas.width = window.innerWidth - 130;
 canvas.height = window.innerHeight;
@@ -54,10 +62,6 @@ const context = canvas.getContext('2d', {willReadFrequently: true});
 context.fillStyle = 'white';
 context.fillRect(0, 0, canvas.width, canvas.height);
 
-let isDrawing = false;
-// let currentColor = 'black';
-
-
 const start = (event) => {
     isDrawing =- true;
     context.beginPath();
@@ -67,7 +71,7 @@ const start = (event) => {
 const draw = (event) => {
     if(isDrawing) {
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-        context.strokeStyle = 'black';
+        context.strokeStyle = currentColor;
         context.lineWidth = 1;
         context.lineCap = 'round';
         context.lineJoin = 'round';
