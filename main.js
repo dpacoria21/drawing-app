@@ -33,8 +33,8 @@ document.querySelector('#app').innerHTML = `
                     </svg>
                 </button>
             </div>
-            <input type="color">
-            <input type="range" min=1 max=20 style="width: 70px;">
+            <input type="color" id="color">
+            <input type="range" min=1 max=20 style="width: 70px;" id="range">
         </div>
         <canvas id="canvas"></canvas>
     </section>
@@ -54,6 +54,13 @@ buttonsColor.forEach((button) => {
     })
 })
 
+// input change color
+const inputColor = document.querySelector('#color');
+inputColor.addEventListener('input', () => {
+    currentColor = inputColor.value;
+})
+
+
 // buttons-width
 const buttonsWidth = document.querySelectorAll('.option-width');
 buttonsWidth.forEach((button) => {
@@ -62,9 +69,15 @@ buttonsWidth.forEach((button) => {
     });
 })
 
+// input change width
+const inputWidth = document.querySelector('#range');
+inputWidth.addEventListener('input', () => {
+    lineWidth = inputWidth.value;
+})
+
+
 canvas.width = window.innerWidth - 130;
 canvas.height = window.innerHeight;
-console.log(canvas.width, canvas.height);
 
 const context = canvas.getContext('2d', {willReadFrequently: true});
 
