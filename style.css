@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:&display=swap');
 
 * {
     padding: 0;
@@ -7,3 +7,106 @@
     box-sizing: border-box;    
 }
 
+canvas {
+    /* border: 1px solid black; */
+    /* width: calc(100% - 150px); */
+    width: 100%;
+    flex-shrink: 1;
+    min-width: 100px;
+    /* height: 100vh; */
+    /* height: 100%; */
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 100%;
+    max-width: 100px;
+    height: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    padding: 10px;
+    gap: 35px;
+    background: #3e68d1;
+}
+
+.container-title {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    /* white-space: nowrap; */
+    font-weight: bold;
+}
+.subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #bbb;
+    font-weight: 200;
+}
+.container-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-color {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #222;
+}
+
+.option-width {
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #222;
+}
+
+.w-1 {
+    width: 10px;
+    height: 10px;
+}
+.w-4 {
+    width: 20px;
+    height: 20px;
+}
+.w-8 {
+    width: 30px;
+    height: 30px;
+}
+.w-12 {
+    width: 40px;
+    height: 40px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.button {
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #ffffff;
+    height: 50px;
+    width: 50px;
+}
+
+.button:hover, .option-width:hover, .option-color:hover {
+    box-shadow: 0 0 10px 1px black;
+}
