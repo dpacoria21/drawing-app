@@ -45,8 +45,9 @@ const sidebar = document.querySelector('.sidebar');
 const container = document.querySelector('.container');
 
 
-canvas.width = window.innerWidth-100;
+canvas.width = window.innerWidth - 130;
 canvas.height = window.innerHeight;
+console.log(canvas.width, canvas.height);
 
 const context = canvas.getContext('2d', {willReadFrequently: true});
 
@@ -66,10 +67,8 @@ const start = (event) => {
 const draw = (event) => {
     if(isDrawing) {
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-        console.log(event.clientX - canvas.offsetLeft);
-        console.log(event.clientY - canvas.offsetTop);
         context.strokeStyle = 'black';
-        context.lineWidth = 3;
+        context.lineWidth = 1;
         context.lineCap = 'round';
         context.lineJoin = 'round';
         context.stroke();
