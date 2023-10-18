@@ -1,24 +1,36 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
 document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+    <section class="container">
+        <div class="sidebar">
+            <p class="title">Drawing App</p>
+            <div class="container-options container-colors">
+                <div class="option-color" style="background: red;"></div>
+                <div class="option-color" style="background: blue;"></div>
+                <div class="option-color" style="background: yellow;"></div>
+                <div class="option-color" style="background: orange;"></div>
+                <div class="option-color" style="background: green;"></div>
+                <div class="option-color" style="background: blueviolet;"></div>
+            </div>
+            <div class="container-options container-width-lines">
+                <div class="option-color w-1" data-width="1"></div>
+                <div class="option-color w-4" data-width="4"></div>
+                <div class="option-color w-8" data-width="8"></div>
+                <div class="option-color w-12" data-width="12"></div>
+            </div>
+            <button class="button" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser-fill" viewBox="0 0 16 16">
+                    <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm.66 11.34L3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
+                </svg>
+            </button>
+            <button class="button" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
+                    <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+                </svg>
+            </button>
+            
+        </div>
+        <canvas id="canvas"></canvas>
+    </section>
+`;
 
-setupCounter(document.querySelector('#counter'))
