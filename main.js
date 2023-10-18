@@ -148,4 +148,3 @@ canvas.addEventListener('mousemove', draw, false);
 canvas.addEventListener('mouseup', stop, false);
 canvas.addEventListener('mouseout', stop, false);
 canvas.addEventListener('touchend', stop, false);
-
