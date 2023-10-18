@@ -33,7 +33,8 @@ document.querySelector('#app').innerHTML = `
                     </svg>
                 </button>
             </div>
-            
+            <input type="color">
+            <input type="range" min=1 max=20 style="width: 70px;">
         </div>
         <canvas id="canvas"></canvas>
     </section>
@@ -44,7 +45,3 @@ const context = canvas.getContext('2d', {willReadFrequently: true});
 
 canvas.style.background = '#fff';
 
-canvas.width = 200;
-canvas.height = 200;
-
-// canvas.fillRect();
