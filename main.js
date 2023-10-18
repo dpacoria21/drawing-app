@@ -1,4 +1,4 @@
-import './style.css'
+import './style.css';
 
 document.querySelector('#app').innerHTML = `
     <section class="container">
@@ -44,38 +44,10 @@ let isDrawing = false;
 let currentColor = 'black';
 let lineWidth = 1;
 
+let currentImages = [];
+let index = -1;
+
 const canvas = document.querySelector('#canvas');
-
-// buttons-color
-const buttonsColor = document.querySelectorAll('.option-color');
-buttonsColor.forEach((button) => {
-    button.addEventListener('click', () => {
-        currentColor = button.style.background;
-    })
-})
-
-// input change color
-const inputColor = document.querySelector('#color');
-inputColor.addEventListener('input', () => {
-    currentColor = inputColor.value;
-})
-
-
-// buttons-width
-const buttonsWidth = document.querySelectorAll('.option-width');
-buttonsWidth.forEach((button) => {
-    button.addEventListener('click', () => {
-        lineWidth = button.getAttribute('data-width');
-    });
-})
-
-// input change width
-const inputWidth = document.querySelector('#range');
-inputWidth.addEventListener('input', () => {
-    lineWidth = inputWidth.value;
-})
-
-
 canvas.width = window.innerWidth - 130;
 canvas.height = window.innerHeight;
 
@@ -84,12 +56,65 @@ const context = canvas.getContext('2d', {willReadFrequently: true});
 context.fillStyle = 'white';
 context.fillRect(0, 0, canvas.width, canvas.height);
 
+// buttons-color
+const buttonsColor = document.querySelectorAll('.option-color');
+buttonsColor.forEach((button) => {
+    button.addEventListener('click', () => {
+        currentColor = button.style.background;
+    });
+});
+
+// input change color
+const inputColor = document.querySelector('#color');
+inputColor.addEventListener('input', () => {
+    currentColor = inputColor.value;
+});
+
+
+// buttons-width
+const buttonsWidth = document.querySelectorAll('.option-width');
+buttonsWidth.forEach((button) => {
+    button.addEventListener('click', () => {
+        lineWidth = button.getAttribute('data-width');
+    });
+});
+
+// input change width
+const inputWidth = document.querySelector('#range');
+inputWidth.addEventListener('input', () => {
+    lineWidth = inputWidth.value;
+});
+
+// buttons
+const buttons = document.querySelectorAll('.button');
+
+// clear button
+const clearCanvas = () => {
+    context.fillStyle = '#fff';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    currentImages = [];
+    index = -1;
+}
+buttons[0].addEventListener('click', clearCanvas);
+
+// undo button
+buttons[1].addEventListener('click', () => {
+    if(index <= 0) {
+        clearCanvas();
+    }else {
+        index--;
+        currentImages.pop();
+        context.putImageData(currentImages[index], 0, 0);
+    }
+});
+
 const start = (event) => {
-    isDrawing =- true;
+    isDrawing = true;
     context.beginPath();
     context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
     event.preventDefault();
-}
+};
+
 const draw = (event) => {
     if(isDrawing) {
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
@@ -99,7 +124,8 @@ const draw = (event) => {
         context.lineJoin = 'round';
         context.stroke();
     }
-}
+};
+
 const stop = (event) => {
     if(isDrawing) {
         context.stroke();
@@ -107,7 +133,12 @@ const stop = (event) => {
         isDrawing = false;
     }
     event.preventDefault();
-}
+
+    if(event.type != 'mouseout') {
+        currentImages.push(context.getImageData(0, 0, canvas.width, canvas.height));
+        index++;
+    }
+};
 
 canvas.addEventListener('touchstart', start, false);
 canvas.addEventListener('touchmove', draw, false);
@@ -117,6 +148,4 @@ canvas.addEventListener('mousemove', draw, false);
 canvas.addEventListener('mouseup', stop, false);
 canvas.addEventListener('mouseout', stop, false);
 canvas.addEventListener('touchend', stop, false);
-
-canvas.style.background = '#fff';
 
